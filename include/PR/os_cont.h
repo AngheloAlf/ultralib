@@ -23,8 +23,8 @@
         Copyright (C) 1998 Nintendo. (Originated by SGI)
         
         $RCSfile: os_cont.h,v $
-        $Revision: 1.1 $
-        $Date: 1998/10/09 08:01:05 $
+        $Revision: 1.2 $
+        $Date: 2004/10/29 00:51:42 $
  *---------------------------------------------------------------------*/
 
 #ifndef _OS_CONT_H_
@@ -53,14 +53,22 @@ extern "C" {
 typedef struct {
 	u16     type;                   /* Controller Type */
 	u8      status;                 /* Controller status */
+#ifndef BBC
 	u8	errno;
+#else
+	u8	err_no;
+#endif
 }OSContStatus;
 
 typedef struct {
 	u16     button;
 	s8      stick_x;		/* -80 <= stick_x <= 80 */
 	s8      stick_y;		/* -80 <= stick_y <= 80 */
+#ifndef BBC
 	u8	errno;
+#else
+	u8	err_no;
+#endif
 } OSContPad;
 
 typedef struct {
@@ -68,7 +76,11 @@ typedef struct {
 	u8      databuffer[32];         /* address of the data buffer */
         u8      addressCrc;             /* CRC code for address */
 	u8      dataCrc;                /* CRC code for data */
+#ifndef BBC
 	u8	errno;
+#else
+	u8	err_no;
+#endif
 } OSContRamIo;
 
 
@@ -93,7 +105,6 @@ typedef struct {
 /* controller errors */
 #define CONT_NO_RESPONSE_ERROR          0x8
 #define CONT_OVERRUN_ERROR              0x4
-#define CONT_RANGE_ERROR               -1
 #ifdef _HW_VERSION_1
 #define CONT_FRAME_ERROR                0x2
 #define CONT_COLLISION_ERROR            0x1

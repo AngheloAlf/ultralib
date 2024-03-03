@@ -15,9 +15,9 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.20 $
- *  $Date: 1997/02/11 08:26:47 $
- *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ramrom.h,v $
+ *  $Revision: 1.3 $
+ *  $Date: 2003/04/26 23:43:20 $
+ *  $Source: /home/routefree/bb/depot/rf/sw/bbplayer/include/ramrom.h,v $
  *
  **************************************************************************/
 
@@ -42,7 +42,12 @@
 #define RAMROM_USER_DATA_SIZE	(RAMROM_MSG_SIZE-RAMROM_MSG_HDR_SIZE)
 
 #define RAMROM_APP_READ_ADDR	(RAMROM_MSG_ADDR + (0*RAMROM_BUF_SIZE))
+#ifdef BBPLAYER
+extern unsigned long __osBbIsBb;
+#define RAMROM_APP_WRITE_ADDR	(__osBbIsBb ? 0x04980000 : (RAMROM_MSG_ADDR + (1*RAMROM_BUF_SIZE)))
+#else
 #define RAMROM_APP_WRITE_ADDR	(RAMROM_MSG_ADDR + (1*RAMROM_BUF_SIZE))
+#endif
 #define RAMROM_RMON_READ_ADDR	(RAMROM_MSG_ADDR + (2*RAMROM_BUF_SIZE))
 #define RAMROM_RMON_WRITE_ADDR	(RAMROM_MSG_ADDR + (3*RAMROM_BUF_SIZE))
 #define RAMROM_PRINTF_ADDR	(RAMROM_MSG_ADDR + (4*RAMROM_BUF_SIZE))

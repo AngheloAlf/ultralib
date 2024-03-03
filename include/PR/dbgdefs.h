@@ -12,42 +12,27 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.2 $
- *  $Date: 2004/02/06 02:27:21 $
- *  $Source: /home/routefree/bb/depot/rf/sw/bbplayer/include/rmon.h,v $
+ *  $Revision: 1.1.1.2 $
+ *  $Date: 2002/10/29 08:06:34 $
+ *  $Source: /home/routefree/bb/depot/rf/sw/bbplayer/include/dbgdefs.h,v $
  *
  **************************************************************************/
 
-#ifndef _RMON_H_
-#define	_RMON_H_
+#ifndef _DBGDEFS_H_
+#define	_DBGDEFS_H_
 
 #ifdef _LANGUAGE_C_PLUS_PLUS
 extern "C" {
 #endif
 
-#include <PR/ultratypes.h>
-#define RMON_DBG_BUF_SIZE  2048
-#define RMON_STACKSIZE 0x1000
 
-#ifdef BBPLAYER
+typedef int TVid;
+typedef unsigned short TVushort;
+typedef unsigned char TVuchar;
 
-/* Let's use GDB debugger instead of RMON */
-#define rmonMain    gdbMain
-#define rmonPrintf  osSyncPrintf
-
-#define GDB_DBG_BUF_SIZE  2048
-#define GDB_STACKSIZE     0x1000
-
-extern void gdbMain( void * );
-extern void gdbInit();
-
-#else
-extern void rmonMain( void * );
-extern void rmonPrintf( const char *, ... );
-#endif
 
 #ifdef _LANGUAGE_C_PLUS_PLUS
 }
 #endif
 
-#endif /* !_OS_H */
+#endif

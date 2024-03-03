@@ -23,8 +23,8 @@
         Copyright (C) 1998 Nintendo. (Originated by SGI)
         
         $RCSfile: os_host.h,v $
-        $Revision: 1.3 $
-        $Date: 1999/06/24 09:23:06 $
+        $Revision: 1.2 $
+        $Date: 2004/06/28 22:34:42 $
  *---------------------------------------------------------------------*/
 
 #ifndef _OS_HOST_H_
@@ -35,7 +35,6 @@ extern "C" {
 #endif
 
 #include <PR/ultratypes.h>
-#include <PR/os_version.h>
 
 #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 
@@ -127,10 +126,6 @@ extern void __osInitialize_emu(void);
 
 #endif  /* _FINAL_ROM */
 
-#if BUILD_VERSION < VERSION_K
-#undef osInitialize
-#endif
-
 /**************************************************************************
  *
  * Extern variables
@@ -152,10 +147,19 @@ extern void		osWriteHost(void *, u32);
 extern void		osAckRamromRead(void);
 extern void		osAckRamromWrite(void);
 
+#ifdef BBPLAYER
+/* BB versions of osReadHost and osWriteHost that returns upon error */
+extern s32		osBbReadHost(void *, u32);
+extern s32		osBbWriteHost(void *, u32);
+#endif
+
 /* RDB port operations */
 
 extern void             osInitRdb(u8 *sendBuf, u32 sendSize);
 
+#ifdef BBPLAYER
+extern void             osResetRdb();
+#endif
 
 #endif  /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 
